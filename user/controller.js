@@ -3,7 +3,7 @@ const connection = require("../db");
 const jwt = require("jsonwebtoken");
 exports.login = function(req, res) {
   const email = req.body.email;
-  connection.query(`SELECT * FROM userstable WHERE email = ?`, email, function(
+  connection.query(`SELECT * FROM usertable WHERE email = ?`, email, function(
     err,
     results
   ) {
@@ -25,7 +25,7 @@ exports.register = function(req, res) {
   const { full_name, email, password } = req.body;
 
   connection.query(
-    "INSERT INTO `userstable` (full_name, email, password) values (?, ?, ?)",
+    "INSERT INTO `usertable` (full_name, email, password) values (?, ?, ?)",
     [full_name, email, password],
     function(err, results) {
       if (err) {
@@ -39,7 +39,10 @@ exports.register = function(req, res) {
           status: 200,
           error: false,
           message: "Register Sucsess!",
-          data: req.body
+          data: {
+            name: req.body.full_name,
+            email: req.body.email
+          }
         });
       }
     }

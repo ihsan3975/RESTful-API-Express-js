@@ -155,15 +155,15 @@ exports.addRed = function(req, res) {
         res.status(350).json({
           status: 350,
           error: true,
-          message: "Number must be lower than quantity: " + req.params.id,
-          data: results
+          message: "Number must be lower than quantity: " + req.params.id
+          // data: results
         });
       } else {
         res.status(200).json({
           status: 200,
           error: false,
-          message: "Succesfully change quantity: " + req.params.id,
-          data: results
+          message: "Succesfully change quantity: " + req.params.id
+          // data: results
         });
       }
     }
@@ -194,7 +194,7 @@ exports.searchProduct = function(req, res) {
 exports.getAll = function(req, res) {
   var sortBy = req.query.sortBy || "id";
   var sort = req.query.sort || "ASC";
-  var limit = req.query.limit || 5;
+  var limit = req.query.limit || 3;
   var page = (req.query.page - 1) * limit || 0;
   var key = `%${req.query.key}%`;
   var query = `SELECT product.id, name, description, image, category, quantity, date_added, date_updated FROM product INNER JOIN category on category.id = product.id_category`;

@@ -9,11 +9,13 @@ exports.verifyToken = function(req, res, next) {
     // Next middleware
     jwt.verify(req.token, process.env.SECRET_KEY, (err, authData) => {
       if (err) {
-        res.sendStatus(403);
+        res.send("Access denied!");
       } else {
         console.log("Sucsess!");
         next();
       }
     });
+  } else {
+    res.send("Wrong email or password, please login with another email!");
   }
 };
